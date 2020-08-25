@@ -2,6 +2,13 @@
 
 A easy, extensible and dynamic flutter form framework.
 
+## Installing
+Add this to your package's pubspec.yaml file:
+```yaml
+dependencies:
+  tform: ^0.0.1
+```
+
 ## Example
 ![avatar](./raw/demo.gif)
 
