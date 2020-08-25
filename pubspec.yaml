@@ -1,8 +1,8 @@
 name: tform
-description: A new flutter plugin project.
+description: A easy, extensible and dynamic flutter form framework.
 version: 0.0.1
-author:
-homepage:
+author: yichahucha
+homepage: https://github.com/yichahucha/tform
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
