@@ -1,7 +1,6 @@
 name: tform
 description: A easy, extensible and dynamic flutter form framework.
 version: 0.0.1
-author: yichahucha
 homepage: https://github.com/yichahucha/tform
 
 environment:
