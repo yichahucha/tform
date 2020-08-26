@@ -21,12 +21,14 @@ class TFormRow {
   String title;
   String placeholder;
   int maxLength;
-  double height;
   bool enabled;
   Widget suffixWidget;
 
   List options;
   bool animation;
+
+  /// config
+  TFormFieldConfig fieldConfig;
 
   /// 输入事件
   void Function(TFormRow) onChanged;
@@ -43,26 +45,27 @@ class TFormRow {
   ///自定义 widget 对应的 state
   var state;
 
-  TFormRow(
-      {this.tag,
-      this.type = TFormRowTypeInput,
-      this.widgetBuilder,
-      this.suffixWidget,
-      this.widget,
-      this.state,
-      this.maxLength,
-      this.title = "",
-      this.value = "",
-      this.height = 58.0,
-      this.required = true,
-      this.requireStar = false,
-      this.enabled = true,
-      this.placeholder = "",
-      this.requireMsg,
-      this.options,
-      this.onChanged,
-      this.onTap,
-      this.validator});
+  TFormRow({
+    this.tag,
+    this.type = TFormRowTypeInput,
+    this.widgetBuilder,
+    this.suffixWidget,
+    this.widget,
+    this.state,
+    this.maxLength,
+    this.title = "",
+    this.value = "",
+    this.required = true,
+    this.requireStar = false,
+    this.enabled = true,
+    this.placeholder = "",
+    this.requireMsg,
+    this.options,
+    this.onChanged,
+    this.onTap,
+    this.validator,
+    this.fieldConfig,
+  });
 
   /// 输入
   TFormRow.input({
@@ -70,7 +73,6 @@ class TFormRow {
     this.title = "",
     this.value = "",
     this.placeholder = "请输入",
-    this.height = 58.0,
     this.required = true,
     this.requireStar = false,
     this.enabled = true,
@@ -79,57 +81,61 @@ class TFormRow {
     this.validator,
     this.suffixWidget,
     this.maxLength,
+    this.fieldConfig,
   }) {
     this.type = TFormRowTypeInput;
   }
 
   /// 单选
-  TFormRow.selector(
-      {this.tag,
-      this.title = "",
-      this.value = "",
-      this.placeholder = "请选择",
-      this.height = 58.0,
-      this.required = true,
-      this.requireStar = false,
-      this.enabled = true,
-      this.requireMsg,
-      this.options,
-      this.validator}) {
+  TFormRow.selector({
+    this.tag,
+    this.title = "",
+    this.value = "",
+    this.placeholder = "请选择",
+    this.required = true,
+    this.requireStar = false,
+    this.enabled = true,
+    this.requireMsg,
+    this.options,
+    this.validator,
+    this.fieldConfig,
+  }) {
     this.type = TFormRowTypeSelector;
   }
 
   /// 多选
-  TFormRow.multipleSelector(
-      {this.tag,
-      this.title = "",
-      this.value = "",
-      this.placeholder = "请选择",
-      this.height = 58.0,
-      this.required = true,
-      this.requireStar = false,
-      this.enabled = true,
-      this.requireMsg,
-      this.options,
-      this.validator}) {
+  TFormRow.multipleSelector({
+    this.tag,
+    this.title = "",
+    this.value = "",
+    this.placeholder = "请选择",
+    this.required = true,
+    this.requireStar = false,
+    this.enabled = true,
+    this.requireMsg,
+    this.options,
+    this.validator,
+    this.fieldConfig,
+  }) {
     this.type = TFormRowTypeMultipleSelector;
   }
 
   /// 自定义选择器，配合 state 定义自己的数据 onTap 点击事件
-  TFormRow.customSelector(
-      {this.tag,
-      this.state,
-      this.title = "",
-      this.value = "",
-      this.placeholder = "请选择",
-      this.height = 58.0,
-      this.required = true,
-      this.requireStar = false,
-      this.enabled = true,
-      this.requireMsg,
-      this.options,
-      this.onTap,
-      this.validator}) {
+  TFormRow.customSelector({
+    this.tag,
+    this.state,
+    this.title = "",
+    this.value = "",
+    this.placeholder = "请选择",
+    this.required = true,
+    this.requireStar = false,
+    this.enabled = true,
+    this.requireMsg,
+    this.options,
+    this.onTap,
+    this.validator,
+    this.fieldConfig,
+  }) {
     this.type = TFormRowTypeCustomSelector;
   }
 
@@ -148,5 +154,21 @@ class TFormRow {
     this.required = true,
     this.requireMsg,
     this.validator,
+  });
+}
+
+class TFormFieldConfig {
+  double height;
+  EdgeInsets padding;
+  TextStyle style;
+  TextStyle placeholderStyle;
+  Divider divider;
+
+  TFormFieldConfig({
+    this.height,
+    this.padding,
+    this.style,
+    this.placeholderStyle,
+    this.divider,
   });
 }

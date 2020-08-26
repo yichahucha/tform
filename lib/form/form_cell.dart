@@ -18,6 +18,7 @@ class _TFormCellState extends State<TFormCell> {
 
   @override
   Widget build(BuildContext context) {
+    // get widget
     Widget widget;
     if (row.widget != null) {
       widget = row.widget;
@@ -43,6 +44,13 @@ class _TFormCellState extends State<TFormCell> {
             tween: Tween(begin: 0.0, end: 1.0),
           )
         : widget;
+    // divider
+    widget =
+        TForm.of(context).divider != null && row != TForm.of(context).rows.last
+            ? Column(
+                children: [widget, TForm.of(context).divider],
+              )
+            : widget;
     return widget;
   }
 }

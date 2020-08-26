@@ -10,28 +10,31 @@ class TForm extends StatefulWidget {
   final List<TFormRow> rows;
   final TFormListType listType;
   final bool readOnly;
+  final Divider divider;
 
-  TForm(
-      {Key key, this.rows, this.listType = TFormListType.column, this.readOnly})
-      : super(key: key);
+  TForm({
+    Key key,
+    this.rows,
+    this.listType = TFormListType.column,
+    this.readOnly,
+    this.divider,
+  }) : super(key: key);
 
-  TForm.sliver(
-      {Key key, this.rows, this.listType = TFormListType.sliver, this.readOnly})
-      : super(key: key);
+  TForm.sliver({
+    Key key,
+    this.rows,
+    this.listType = TFormListType.sliver,
+    this.readOnly,
+    this.divider,
+  }) : super(key: key);
 
-  TForm.builder(
-      {Key key,
-      this.rows,
-      this.listType = TFormListType.builder,
-      this.readOnly})
-      : super(key: key);
-
-  TForm.separated(
-      {Key key,
-      this.rows,
-      this.listType = TFormListType.separated,
-      this.readOnly})
-      : super(key: key);
+  TForm.builder({
+    Key key,
+    this.rows,
+    this.listType = TFormListType.builder,
+    this.readOnly,
+    this.divider,
+  }) : super(key: key);
 
   static TFormState of(BuildContext context) {
     final _TFormScope scope =
@@ -47,6 +50,7 @@ class TFormState extends State<TForm> {
   List<TFormRow> rows;
   get form => widget;
   get readOnly => widget.readOnly;
+  get divider => widget.divider;
 
   TFormState(this.rows);
 
@@ -137,16 +141,6 @@ class TFormList extends StatelessWidget {
             return TFormCell(row: rows[index]);
           },
         );
-        break;
-      case TFormListType.separated:
-        widget = ListView.separated(
-            itemBuilder: (BuildContext context, int index) {
-              return TFormCell(row: rows[index]);
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return Divider();
-            },
-            itemCount: rows.length);
         break;
       default:
     }
