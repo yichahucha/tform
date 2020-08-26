@@ -26,6 +26,7 @@ class TFormRow {
   Widget suffixWidget;
 
   List options;
+  bool animation;
 
   /// 输入事件
   void Function(TFormRow) onChanged;

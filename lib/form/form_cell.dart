@@ -4,10 +4,17 @@ import 'form.dart';
 import 'form_field.dart';
 import 'form_row.dart';
 
-class TFormCell extends StatelessWidget {
-  const TFormCell({Key key, this.row}) : super(key: key);
+class TFormCell extends StatefulWidget {
+  TFormCell({Key key, this.row}) : super(key: key);
 
   final TFormRow row;
+
+  @override
+  _TFormCellState createState() => _TFormCellState();
+}
+
+class _TFormCellState extends State<TFormCell> {
+  get row => widget.row;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +26,23 @@ class TFormCell extends StatelessWidget {
     } else {
       widget = TFormField(row: row);
     }
-    return AbsorbPointer(
+    // readonly
+    widget = AbsorbPointer(
         child: widget, absorbing: TForm.of(context).readOnly ?? false);
+    // animation
+    widget = row.animation ?? false
+        ? TweenAnimationBuilder(
+            child: widget,
+            duration: Duration(milliseconds: 500),
+            builder: (BuildContext context, value, Widget child) {
+              return Opacity(
+                opacity: value,
+                child: child,
+              );
+            },
+            tween: Tween(begin: 0.0, end: 1.0),
+          )
+        : widget;
+    return widget;
   }
 }

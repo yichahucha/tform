@@ -10,13 +10,11 @@ import 'form_utils.dart';
 
 class FormPage extends StatelessWidget {
   FormPage({Key key}) : super(key: key);
-
   final GlobalKey _formKey = GlobalKey<TFormState>();
 
   @override
   Widget build(BuildContext context) {
     Application.appContext = context;
-
     return Scaffold(
         appBar: AppBar(
           title: Text("表单"),

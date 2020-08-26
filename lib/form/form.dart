@@ -52,9 +52,10 @@ class TFormState extends State<TForm> {
 
   void insert(currentRow, item) {
     if (item is List<TFormRow>) {
-      rows.insertAll(rows.indexOf(currentRow) + 1, item);
+      rows.insertAll(rows.indexOf(currentRow) + 1,
+          item.map((e) => e..animation = true).toList());
     } else if (item is TFormRow) {
-      rows.insert(rows.indexOf(currentRow), item);
+      rows.insert(rows.indexOf(currentRow), item..animation = true);
     }
     reload();
   }
