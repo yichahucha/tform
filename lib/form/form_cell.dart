@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'form.dart';
 import 'form_field.dart';
 import 'form_row.dart';
 
@@ -18,6 +19,7 @@ class TFormCell extends StatelessWidget {
     } else {
       widget = TFormField(row: row);
     }
-    return widget;
+    return AbsorbPointer(
+        child: widget, absorbing: TForm.of(context).readOnly ?? false);
   }
 }

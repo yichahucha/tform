@@ -30,6 +30,7 @@ class FormPage extends StatelessWidget {
         TForm.sliver(
           key: _formKey,
           rows: formRows,
+          readOnly: false,
         ),
         SliverToBoxAdapter(
           child: Padding(
