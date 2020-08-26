@@ -5,14 +5,15 @@ const TFormRowTypeSelector = "TFormRowTypeSelector";
 const TFormRowTypeMultipleSelector = "TFormRowTypeMultipleSelector";
 const TFormRowTypeCustomSelector = "TFormRowTypeCustomSelector";
 
-class TFormRow {
-  /// 唯一标识
-  String tag;
+abstract class TFormCloneable<T extends TFormCloneable<T>> {
+  T clone();
+}
 
-  /// 类型（目前内置单选、多选、输入类型）
+class TFormRow implements TFormCloneable<TFormRow> {
+  String tag;
   String type;
 
-  bool required;
+  bool require;
   bool requireStar;
   String requireMsg;
   bool Function(TFormRow) validator;
@@ -55,7 +56,7 @@ class TFormRow {
     this.maxLength,
     this.title = "",
     this.value = "",
-    this.required = true,
+    this.require = true,
     this.requireStar = false,
     this.enabled = true,
     this.placeholder = "",
@@ -73,7 +74,7 @@ class TFormRow {
     this.title = "",
     this.value = "",
     this.placeholder = "请输入",
-    this.required = true,
+    this.require = true,
     this.requireStar = false,
     this.enabled = true,
     this.requireMsg,
@@ -92,7 +93,7 @@ class TFormRow {
     this.title = "",
     this.value = "",
     this.placeholder = "请选择",
-    this.required = true,
+    this.require = true,
     this.requireStar = false,
     this.enabled = true,
     this.requireMsg,
@@ -109,7 +110,7 @@ class TFormRow {
     this.title = "",
     this.value = "",
     this.placeholder = "请选择",
-    this.required = true,
+    this.require = true,
     this.requireStar = false,
     this.enabled = true,
     this.requireMsg,
@@ -127,7 +128,7 @@ class TFormRow {
     this.title = "",
     this.value = "",
     this.placeholder = "请选择",
-    this.required = true,
+    this.require = true,
     this.requireStar = false,
     this.enabled = true,
     this.requireMsg,
@@ -143,7 +144,7 @@ class TFormRow {
   TFormRow.customCell({
     this.tag,
     this.widget,
-    this.required = false,
+    this.require = false,
   });
 
   // 自定义有状态的 cell 配合 state 属性使用
@@ -151,10 +152,34 @@ class TFormRow {
     this.tag,
     this.state,
     this.widgetBuilder,
-    this.required = true,
+    this.require = true,
     this.requireMsg,
     this.validator,
   });
+
+  @override
+  TFormRow clone() {
+    return TFormRow()
+      ..tag = tag
+      ..type = type
+      ..widgetBuilder = widgetBuilder
+      ..suffixWidget = suffixWidget
+      ..widget = widget
+      ..state = state
+      ..maxLength = maxLength
+      ..title = title
+      ..value = value
+      ..require = require
+      ..requireStar = requireStar
+      ..enabled = enabled
+      ..placeholder = placeholder
+      ..requireMsg = requireMsg
+      ..options = options
+      ..onChanged = onChanged
+      ..onTap = onTap
+      ..validator = validator
+      ..fieldConfig = fieldConfig;
+  }
 }
 
 class TFormFieldConfig {

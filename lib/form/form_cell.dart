@@ -18,7 +18,7 @@ class _TFormCellState extends State<TFormCell> {
 
   @override
   Widget build(BuildContext context) {
-    // get widget
+    // widget
     Widget widget;
     if (row.widget != null) {
       widget = row.widget;

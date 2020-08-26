@@ -41,7 +41,7 @@ class _TFormFieldState extends State<TFormField> {
                     TextStyle(fontSize: 15, color: Colors.black87),
                 children: [
                   TextSpan(
-                      text: row.required ? row.requireStar ? "*" : "" : "",
+                      text: row.require ? row.requireStar ? "*" : "" : "",
                       style:
                           row.fieldConfig?.style?.copyWith(color: Colors.red) ??
                               TextStyle(fontSize: 15, color: Colors.red))

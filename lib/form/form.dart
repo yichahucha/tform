@@ -12,6 +12,8 @@ class TForm extends StatefulWidget {
   final bool readOnly;
   final Divider divider;
 
+  get deepCopyRows => rows.map((e) => e.clone()).toList();
+
   TForm({
     Key key,
     this.rows,
@@ -43,7 +45,7 @@ class TForm extends StatefulWidget {
   }
 
   @override
-  TFormState createState() => TFormState(rows);
+  TFormState createState() => TFormState(deepCopyRows);
 }
 
 class TFormState extends State<TForm> {
@@ -73,6 +75,12 @@ class TFormState extends State<TForm> {
       rows.remove(item);
     }
     reload();
+  }
+
+  void reset() {
+    setState(() {
+      rows = form.deepCopyRows;
+    });
   }
 
   void reload() {
