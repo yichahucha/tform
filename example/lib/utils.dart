@@ -16,9 +16,6 @@ void showToast(String text) {
     child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          width: 12.0,
-        ),
         Text(
           text,
           style: TextStyle(

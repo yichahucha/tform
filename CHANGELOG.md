@@ -10,3 +10,6 @@
 * add clearButtonMode
 * add obscureText
 * add keyboardType
+
+## 0.3.0
+* add dynamic form example

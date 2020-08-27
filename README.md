@@ -6,7 +6,7 @@ A easy, extensible and dynamic flutter form framework.
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  tform: ^0.2.0
+  tform: ^0.3.0
 ```
 
 ## Example

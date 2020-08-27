@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -53,29 +55,30 @@ class TFormRow implements TFormCloneable<TFormRow> {
   ///自定义 widget 对应的 state
   var state;
 
-  TFormRow(
-      {this.tag,
-      this.type = TFormRowTypeInput,
-      this.widgetBuilder,
-      this.suffixWidget,
-      this.widget,
-      this.state,
-      this.maxLength,
-      this.title = "",
-      this.value = "",
-      this.require = true,
-      this.requireStar = false,
-      this.enabled = true,
-      this.placeholder = "",
-      this.requireMsg,
-      this.options,
-      this.onChanged,
-      this.onTap,
-      this.validator,
-      this.fieldConfig,
-      this.keyboardType,
-      this.clearButtonMode,
-      this.obscureText});
+  TFormRow({
+    this.tag,
+    this.type = TFormRowTypeInput,
+    this.widgetBuilder,
+    this.suffixWidget,
+    this.widget,
+    this.state,
+    this.maxLength,
+    this.title = "",
+    this.value = "",
+    this.require = true,
+    this.requireStar = false,
+    this.enabled = true,
+    this.placeholder = "",
+    this.requireMsg,
+    this.options,
+    this.onChanged,
+    this.onTap,
+    this.validator,
+    this.fieldConfig,
+    this.keyboardType,
+    this.clearButtonMode,
+    this.obscureText,
+  });
 
   /// 输入
   TFormRow.input({

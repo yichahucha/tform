@@ -14,20 +14,22 @@ class LTSelectorPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
         actions: [
-          FlatButton(
-            child: Text(
-              "完成",
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
-            onPressed: () {
-              String values = options
-                  .where((element) => element.selected)
-                  .map((e) => e.text)
-                  .toList()
-                  .join(",");
-              Navigator.of(context).pop(values);
-            },
-          ),
+          isMultipleSelector
+              ? FlatButton(
+                  child: Text(
+                    "完成",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                  onPressed: () {
+                    String values = options
+                        .where((element) => element.selected)
+                        .map((e) => e.text)
+                        .toList()
+                        .join(",");
+                    Navigator.of(context).pop(values);
+                  },
+                )
+              : SizedBox.shrink(),
         ],
       ),
       body: ListView.builder(

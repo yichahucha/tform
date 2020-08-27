@@ -16,14 +16,17 @@ class TFormField extends StatefulWidget {
 class _TFormFieldState extends State<TFormField> {
   final TextEditingController _controller = TextEditingController();
 
-  bool get isSelector =>
+  bool get _isSelector =>
       widget.row.type == TFormRowTypeSelector ||
       widget.row.type == TFormRowTypeMultipleSelector ||
       widget.row.type == TFormRowTypeCustomSelector;
 
-  bool get isInput => widget.row.type == TFormRowTypeInput;
+  bool get _isInput => widget.row.type == TFormRowTypeInput;
 
   TFormRow get row => widget.row;
+  bool get _enabled => row.enabled ?? true;
+  bool get _require => row.require ?? false;
+  bool get _requireStar => row.requireStar ?? false;
 
   @override
   void initState() {
@@ -43,12 +46,12 @@ class _TFormFieldState extends State<TFormField> {
             children: [
               RichText(
                   text: TextSpan(
-                text: row.title,
+                text: row.title ?? "",
                 style: row.fieldConfig?.style ??
                     TextStyle(fontSize: 15, color: Colors.black87),
                 children: [
                   TextSpan(
-                      text: row.require ? row.requireStar ? "*" : "" : "",
+                      text: _require ? _requireStar ? "*" : "" : "",
                       style:
                           row.fieldConfig?.style?.copyWith(color: Colors.red) ??
                               TextStyle(fontSize: 15, color: Colors.red))
@@ -59,36 +62,36 @@ class _TFormFieldState extends State<TFormField> {
               ),
               Expanded(
                 child: CupertinoTextField(
-                  suffix: isSelector
+                  suffix: _isSelector
                       ? Icon(Icons.keyboard_arrow_right,
                           color:
                               row.fieldConfig?.style?.color ?? Colors.black87)
                       : null,
                   obscureText: row.obscureText ?? false,
                   controller: _controller,
-                  clearButtonMode: isInput && row.enabled
+                  clearButtonMode: _isInput && _enabled
                       ? row.clearButtonMode ?? OverlayVisibilityMode.never
                       : OverlayVisibilityMode.never,
-                  enabled: row.enabled,
+                  enabled: _enabled,
                   textAlign: row.type == TFormRowTypeInput
                       ? TextAlign.left
                       : TextAlign.right,
                   style: row.fieldConfig?.style ??
                       TextStyle(fontSize: 15, color: Colors.black87),
                   decoration: BoxDecoration(),
-                  placeholder: row.placeholder,
+                  placeholder: row.placeholder ?? "",
                   keyboardType: row.keyboardType,
                   maxLength: row.maxLength,
                   placeholderStyle: row.fieldConfig?.placeholderStyle ??
                       const TextStyle(
                           fontSize: 15, color: CupertinoColors.placeholderText),
-                  readOnly: isSelector,
+                  readOnly: _isSelector,
                   onChanged: (value) {
                     row.value = value;
                     if (row.onChanged != null) row.onChanged(row);
                   },
                   onTap: () async {
-                    if (isSelector) {
+                    if (_isSelector) {
                       String value = "";
                       switch (widget.row.type) {
                         case TFormRowTypeMultipleSelector:

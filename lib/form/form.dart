@@ -98,12 +98,8 @@ class TFormState extends State<TForm> {
   Widget build(BuildContext context) {
     return _TFormScope(
         state: this,
-        child: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-          child: TFormList(
-            type: widget.listType,
-          ),
+        child: TFormList(
+          type: widget.listType,
         ));
   }
 }
@@ -130,32 +126,43 @@ class TFormList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rows = TForm.of(context).rows;
-    Widget widget;
+    Widget list;
     switch (type) {
       case TFormListType.column:
-        widget = Column(
-          children: rows.map((e) {
-            return TFormCell(row: e);
-          }).toList(),
+        list = GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+          child: Column(
+            children: rows.map((e) {
+              return TFormCell(row: e);
+            }).toList(),
+          ),
         );
         break;
       case TFormListType.sliver:
-        widget = SliverList(
+        list = SliverList(
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
-          return TFormCell(row: rows[index]);
+          return GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+              child: TFormCell(row: rows[index]));
         }, childCount: rows.length));
         break;
       case TFormListType.builder:
-        widget = ListView.builder(
-          itemCount: rows.length,
-          itemBuilder: (BuildContext context, int index) {
-            return TFormCell(row: rows[index]);
-          },
+        list = GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+          child: ListView.builder(
+            itemCount: rows.length,
+            itemBuilder: (BuildContext context, int index) {
+              return TFormCell(row: rows[index]);
+            },
+          ),
         );
         break;
       default:
     }
-    return widget;
+    return list;
   }
 }
