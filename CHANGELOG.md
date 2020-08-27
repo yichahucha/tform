@@ -13,3 +13,4 @@
 
 ## 0.3.0
 * add dynamic form example
+* bug fix
