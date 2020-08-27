@@ -5,3 +5,8 @@
 * add list animation
 * add list divider
 * add textfield config
+
+## 0.2.0
+* add clearButtonMode
+* add obscureText
+* add keyboardType
