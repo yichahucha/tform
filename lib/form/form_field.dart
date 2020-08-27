@@ -21,7 +21,14 @@ class _TFormFieldState extends State<TFormField> {
       widget.row.type == TFormRowTypeMultipleSelector ||
       widget.row.type == TFormRowTypeCustomSelector;
 
+  bool get isInput => widget.row.type == TFormRowTypeInput;
+
   TFormRow get row => widget.row;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,18 +59,33 @@ class _TFormFieldState extends State<TFormField> {
               ),
               Expanded(
                 child: CupertinoTextField(
-                  maxLength: row.maxLength,
-                  minLines: null,
+                  suffix: isSelector
+                      ? Icon(Icons.keyboard_arrow_right,
+                          color:
+                              row.fieldConfig?.style?.color ?? Colors.black87)
+                      : null,
+                  obscureText: row.obscureText ?? false,
                   controller: _controller,
+                  clearButtonMode: isInput && row.enabled
+                      ? row.clearButtonMode ?? OverlayVisibilityMode.never
+                      : OverlayVisibilityMode.never,
+                  enabled: row.enabled,
+                  textAlign: row.type == TFormRowTypeInput
+                      ? TextAlign.left
+                      : TextAlign.right,
+                  style: row.fieldConfig?.style ??
+                      TextStyle(fontSize: 15, color: Colors.black87),
+                  decoration: BoxDecoration(),
+                  placeholder: row.placeholder,
+                  keyboardType: row.keyboardType,
+                  maxLength: row.maxLength,
                   placeholderStyle: row.fieldConfig?.placeholderStyle ??
                       const TextStyle(
                           fontSize: 15, color: CupertinoColors.placeholderText),
                   readOnly: isSelector,
                   onChanged: (value) {
                     row.value = value;
-                    if (row.onChanged != null) {
-                      row.onChanged(row);
-                    }
+                    if (row.onChanged != null) row.onChanged(row);
                   },
                   onTap: () async {
                     if (isSelector) {
@@ -94,29 +116,15 @@ class _TFormFieldState extends State<TFormField> {
                         default:
                       }
                       if (value != null && value.length > 0) {
-                        row.value = value;
-                        setState(() {});
+                        setState(() {
+                          row.value = value;
+                        });
                       }
                     }
                   },
-                  enabled: row.enabled,
-                  textAlign: row.type == TFormRowTypeInput
-                      ? TextAlign.left
-                      : TextAlign.right,
-                  style: row.fieldConfig?.style ??
-                      TextStyle(fontSize: 15, color: Colors.black87),
-                  clearButtonMode: OverlayVisibilityMode.never,
-                  decoration: BoxDecoration(),
-                  placeholder: row.placeholder,
                 ),
               ),
-              row.suffixWidget != null
-                  ? row.suffixWidget
-                  : isSelector
-                      ? Icon(Icons.keyboard_arrow_right,
-                          color:
-                              row.fieldConfig?.style?.color ?? Colors.black87)
-                      : SizedBox.shrink(),
+              row.suffixWidget != null ? row.suffixWidget : SizedBox.shrink(),
             ],
           ),
         ),

@@ -98,8 +98,12 @@ class TFormState extends State<TForm> {
   Widget build(BuildContext context) {
     return _TFormScope(
         state: this,
-        child: TFormList(
-          type: widget.listType,
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+          child: TFormList(
+            type: widget.listType,
+          ),
         ));
   }
 }

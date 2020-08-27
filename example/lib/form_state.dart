@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tform/tform.dart';
 import 'package:tform_example/widgets/photos_cell.dart';
@@ -13,30 +14,28 @@ List<TFormRow> buildFormRows() {
       title: "姓名",
       placeholder: "请输入姓名",
       value: "张二蛋",
-      // fieldConfig: TFormFieldConfig(
-      //     height: 200,
-      //     style: TextStyle(color: Colors.black87, fontSize: 18),
-      //     divider: Divider(
-      //       height: 10,
-      //       thickness: 10,
-      //     )),
+      fieldConfig: TFormFieldConfig(
+          height: 100, style: TextStyle(color: Colors.red, fontSize: 20)),
     ),
     TFormRow.input(
-        enabled: false,
-        title: "身份证号",
-        placeholder: "请输入身份证号",
-        value: "4101041991892382938293"),
+      title: "身份证号",
+      placeholder: "请输入身份证号",
+      value: "4101041991892382938293",
+      clearButtonMode: OverlayVisibilityMode.editing,
+    ),
     TFormRow.input(
-        title: "预留手机号",
-        placeholder: "请输入手机号",
-        maxLength: 11,
-        requireMsg: "请输入正确的手机号",
-        requireStar: true,
-        validator: (row) {
-          return RegExp(
-                  r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$')
-              .hasMatch(row.value);
-        }),
+      keyboardType: TextInputType.number,
+      title: "预留手机号",
+      placeholder: "请输入手机号",
+      maxLength: 11,
+      requireMsg: "请输入正确的手机号",
+      requireStar: true,
+      validator: (row) {
+        return RegExp(
+                r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$')
+            .hasMatch(row.value);
+      },
+    ),
     TFormRow.input(
       title: "验证码",
       placeholder: "请输入验证码",
@@ -88,27 +87,29 @@ List<TFormRow> buildFormRows() {
       },
     ),
     TFormRow.customCell(
-        widget: Container(
-            color: Colors.grey[200],
-            height: 48,
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: Text("------ 我是自定义的Cell ------"))),
+      widget: Container(
+          color: Colors.grey[200],
+          height: 48,
+          width: double.infinity,
+          alignment: Alignment.center,
+          child: Text("------ 我是自定义的Cell ------")),
+    ),
     TFormRow.customCellBuilder(
-        state: [
-          SelectImageModel(),
-          SelectImageModel(),
-          SelectImageModel(),
-        ],
-        requireMsg: "请完成上传房屋照片",
-        validator: (row) {
-          return (row.state as List)
-              .every((element) => (element as SelectImageModel).path != null);
-        },
-        widgetBuilder: (context, row) {
-          return CustomPhotosWidget(
-            row: row,
-          );
-        }),
+      state: [
+        SelectImageModel(),
+        SelectImageModel(),
+        SelectImageModel(),
+      ],
+      requireMsg: "请完成上传房屋照片",
+      validator: (row) {
+        return (row.state as List)
+            .every((element) => (element as SelectImageModel).path != null);
+      },
+      widgetBuilder: (context, row) {
+        return CustomPhotosWidget(
+          row: row,
+        );
+      },
+    ),
   ];
 }
