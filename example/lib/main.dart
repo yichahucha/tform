@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tform_example/application.dart';
-import 'package:tform_example/dynamic/form_dynamic_page.dart';
 
 import './basic/form_page.dart';
+import 'application.dart';
+import 'dynamic/form_dynamic_page.dart';
 
 void main() {
   runApp(MyApp());
