@@ -148,7 +148,12 @@ List<TFormRow> buildFormRows() {
       ],
       requireMsg: "请完成上传房屋照片",
       validator: (row) {
-        return row.state.every((element) => (element["picurl"].length > 0));
+        bool suc = (row.state as List)
+            .every((element) => (element["picurl"].length > 0));
+        if (!suc) {
+          row.requireMsg = "请完成${row.title}上传";
+        }
+        return suc;
       },
       widgetBuilder: (context, row) {
         return CustomPhotosWidget(row: row);
