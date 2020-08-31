@@ -10,10 +10,10 @@ dependencies:
 ```
 
 ## Example
-![avatar](./raw/demo.gif)
+![avatar](./assets/demo.gif)
 
 ## Build Form Rows
-![avatar](./raw/carbon_rows.png)
+![avatar](./assets/carbon_rows.png)
 
 ## Build Form
-![avatar](./raw/carbon_page.png)
+![avatar](./assets/carbon_page.png)
