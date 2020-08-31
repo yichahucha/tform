@@ -13,14 +13,14 @@ class CustomPhotosWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(22, 0, 22, 0),
+      padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
       child: Column(
         children: [
           Container(
             height: 48,
             alignment: Alignment.centerLeft,
             child: Text(
-              "房屋照片",
+              row.title,
               style: TextStyle(fontSize: 15, color: Colors.black87),
             ),
           ),
@@ -31,11 +31,9 @@ class CustomPhotosWidget extends StatelessWidget {
               itemCount: (row.state as List).length,
               itemBuilder: (BuildContext context, int index) {
                 return SelectImageView(
-                  imageModel: row.state[index],
-                  selected: (model) async {
-                    // model.url =
-                    //     "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1598000545&di=3b9c32cab88272b744c569548a35810a&src=http://a1.att.hudong.com/05/00/01300000194285122188000535877.jpg";
-                    return true;
+                  selected: (image) async {
+                    //实际情况是上传照片 返回图片URL，这里模拟数据使用路径
+                    row.state[index]["picurl"] = image.path;
                   },
                 );
               },

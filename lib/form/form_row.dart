@@ -33,8 +33,6 @@ class TFormRow implements TFormCloneable<TFormRow> {
 
   bool animation;
 
-  Widget suffixWidget;
-
   /// textfield 样式配置
   TFormFieldConfig fieldConfig;
 
@@ -46,6 +44,9 @@ class TFormRow implements TFormCloneable<TFormRow> {
 
   /// 自定义 Cell
   Widget widget;
+
+  /// 通过 builder 的方式自定义 suffixWidget
+  Widget Function(BuildContext, TFormRow) suffixWidget;
 
   /// 通过 builder 的方式自定义 Cell
   Widget Function(BuildContext, TFormRow) widgetBuilder;
@@ -96,6 +97,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.keyboardType,
     this.clearButtonMode,
     this.obscureText,
+    this.state,
   }) {
     this.type = TFormRowTypeInput;
   }
@@ -159,6 +161,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
   // 自定义无状态 cell
   TFormRow.customCell({
     this.tag,
+    this.title = "",
     this.widget,
     this.require = false,
   });
@@ -167,6 +170,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
   TFormRow.customCellBuilder({
     this.tag,
     this.state,
+    this.title = "",
     this.widgetBuilder,
     this.require = true,
     this.requireMsg,

@@ -127,7 +127,9 @@ class _TFormFieldState extends State<TFormField> {
                   },
                 ),
               ),
-              row.suffixWidget != null ? row.suffixWidget : SizedBox.shrink(),
+              row.suffixWidget != null
+                  ? row.suffixWidget(context, row)
+                  : SizedBox.shrink(),
             ],
           ),
         ),

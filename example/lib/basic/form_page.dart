@@ -7,7 +7,6 @@ import 'package:tform/tform.dart';
 import '../utils.dart';
 
 import 'package:tform_example/widgets/photos_cell.dart';
-import 'package:tform_example/widgets/select_image.dart';
 import 'package:tform_example/widgets/verifitionc_code_button.dart';
 
 class FormPage extends StatelessWidget {
@@ -83,13 +82,15 @@ List<TFormRow> buildFormRows() {
     TFormRow.input(
       title: "验证码",
       placeholder: "请输入验证码",
-      suffixWidget: VerifitionCodeButton(
-        title: "获取验证码",
-        seconds: 60,
-        onPressed: () {
-          showToast("验证码已发送");
-        },
-      ),
+      suffixWidget: (context, row) {
+        return VerifitionCodeButton(
+          title: "获取验证码",
+          seconds: 60,
+          onPressed: () {
+            showToast("验证码已发送");
+          },
+        );
+      },
     ),
     TFormRow.selector(
       title: "学历",
@@ -139,20 +140,18 @@ List<TFormRow> buildFormRows() {
           child: Text("------ 我是自定义的Cell ------")),
     ),
     TFormRow.customCellBuilder(
+      title: "房屋照片",
       state: [
-        SelectImageModel(),
-        SelectImageModel(),
-        SelectImageModel(),
+        {"picurl": ""},
+        {"picurl": ""},
+        {"picurl": ""}
       ],
       requireMsg: "请完成上传房屋照片",
       validator: (row) {
-        return (row.state as List)
-            .every((element) => (element as SelectImageModel).path != null);
+        return row.state.every((element) => (element["picurl"].length > 0));
       },
       widgetBuilder: (context, row) {
-        return CustomPhotosWidget(
-          row: row,
-        );
+        return CustomPhotosWidget(row: row);
       },
     ),
   ];

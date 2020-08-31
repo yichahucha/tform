@@ -3,18 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class SelectImageModel {
-  String path;
-  String url;
-
-  SelectImageModel({this.path, this.url});
-}
-
 class SelectImageView extends StatefulWidget {
-  SelectImageView({Key key, this.selected, this.imageModel}) : super(key: key);
+  SelectImageView({Key key, this.selected}) : super(key: key);
 
-  final SelectImageModel imageModel;
-  final Future Function(SelectImageModel model) selected;
+  final Future Function(File image) selected;
 
   @override
   _SelectImageViewState createState() => _SelectImageViewState();
@@ -23,6 +15,7 @@ class SelectImageView extends StatefulWidget {
 class _SelectImageViewState extends State<SelectImageView> {
   final picker = ImagePicker();
   File _image;
+  String _imageUrl;
 
   Future<bool> _getImage(ImageSource source) async {
     final pickedFile = await picker.getImage(source: source);
@@ -76,10 +69,9 @@ class _SelectImageViewState extends State<SelectImageView> {
         if (source == null) return;
         final bool result = await _getImage(source);
         if (!result) return;
-        widget.imageModel.path = _image.path;
-
         if (widget.selected == null) return;
-        await widget.selected(widget.imageModel);
+        final url = await widget.selected(_image);
+        if (url != null) _imageUrl = url;
         setState(() {});
       },
       child: Container(
@@ -87,10 +79,10 @@ class _SelectImageViewState extends State<SelectImageView> {
         margin: EdgeInsets.all(5),
         color: Colors.grey[200],
         child: Center(
-            child: widget.imageModel.url != null
-                ? Image.network(widget.imageModel.url)
-                : widget.imageModel.path != null
-                    ? Image.file(File(widget.imageModel.path))
+            child: _imageUrl != null
+                ? Image.network(_imageUrl)
+                : _image != null
+                    ? Image.file(File(_image.path))
                     : SizedBox.shrink()),
       ),
     );

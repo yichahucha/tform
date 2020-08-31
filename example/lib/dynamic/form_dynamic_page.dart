@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:tform/tform.dart';
 import 'package:tform_example/application.dart';
 import 'package:tform_example/widgets/next_button.dart';
+import 'package:tform_example/widgets/photos_cell.dart';
 
 import '../utils.dart';
 
@@ -111,6 +112,47 @@ Future getData() async {
           require: e["mustinput"],
           requireStar: e["mustinput"],
           options: (e["options"] as List).map((e) => e["selectvalue"]).toList(),
+        );
+        break;
+      case 6:
+        row = TFormRow.input(
+          tag: e["proid"],
+          title: e["title"],
+          placeholder: e["hintvalue"],
+          value: e["value"],
+          enabled: e["editable"],
+          require: e["mustinput"],
+          requireStar: e["mustinput"],
+          state: e["btnstate"],
+          validator: (row) {
+            return row.state == "1";
+          },
+          suffixWidget: (context, row) {
+            return FlatButton(
+                onPressed: () {
+                  row.state = "1";
+                  showToast("验证成功");
+                },
+                child: Text(
+                  "验证",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(color: Colors.blue),
+                ));
+          },
+        );
+        break;
+      case 7:
+        row = TFormRow.customCellBuilder(
+          tag: e["proid"],
+          title: e["title"],
+          state: e["piclist"],
+          requireMsg: "请完成上传房屋照片",
+          validator: (row) {
+            return row.state.every((element) => (element["picurl"].length > 0));
+          },
+          widgetBuilder: (context, row) {
+            return CustomPhotosWidget(row: row);
+          },
         );
         break;
       default:

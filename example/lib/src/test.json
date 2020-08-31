@@ -230,8 +230,8 @@
                 "type":"6",
                 "proid":"PB0014",
                 "title":"手机号码",
-                "hintvalue":"13553064541",
-                "value":"1",
+                "hintvalue":"请输入手机号",
+                "value":"15838281111",
                 "editable":true,
                 "maxlength":"11",
                 "minlength":null,
@@ -244,7 +244,7 @@
                 "options":null,
                 "btnstate":"0",
                 "btnlabel":"验证",
-                "btnUrl":"/appbmguser/app007/v1/04,/appbmguser/app007/v1/03",
+                "btnUrl":"",
                 "piclist":null
             },
             {
@@ -462,15 +462,72 @@
                         "picid":"2",
                         "picdesc":"身份证反面",
                         "picstateicon":null,
-                        "picurl":"http://192.168.2.244:88/static/smallLoan/app/images/icon_+.png",
-                        "hintpic":"http://192.168.2.244:88/static/smallLoan/app/images/icon_+.png"
+                        "picurl":"",
+                        "hintpic":"https://pic2.16pic.com/00/20/02/16pic_2002642_b.jpg"
                     },
                     {
                         "picid":"2",
                         "picdesc":"身份证反面",
                         "picstateicon":null,
-                        "picurl":"http://192.168.2.244:88/static/smallLoan/app/images/icon_+.png",
-                        "hintpic":"http://192.168.2.244:88/static/smallLoan/app/images/icon_+.png"
+                        "picurl":"",
+                        "hintpic":"https://pic2.16pic.com/00/20/02/16pic_2002642_b.jpg"
+                    }
+                ]
+            },
+            {
+                "type":"7",
+                "proid":"PB01294",
+                "title":"房屋照片 (5-5)",
+                "hintvalue":null,
+                "value":"",
+                "editable":true,
+                "maxlength":"5",
+                "minlength":"2",
+                "mustinput":null,
+                "noticemsg":"请关注",
+                "stateicon":"http://192.168.2.244:88/static/smallLoan/app/images/icon_tishi.png",
+                "startdate":null,
+                "enddate":null,
+                "extra":null,
+                "options":null,
+                "btnstate":null,
+                "btnlabel":null,
+                "btnUrl":null,
+                "piclist":[
+                    {
+                        "picid":"2",
+                        "picdesc":"",
+                        "picstateicon":null,
+                        "picurl":"",
+                        "hintpic":"https://pic2.16pic.com/00/20/02/16pic_2002642_b.jpg"
+                    },
+                    {
+                        "picid":"2",
+                        "picdesc":"",
+                        "picstateicon":null,
+                        "picurl":"",
+                        "hintpic":"https://pic2.16pic.com/00/20/02/16pic_2002642_b.jpg"
+                    },
+                    {
+                        "picid":"2",
+                        "picdesc":"",
+                        "picstateicon":null,
+                        "picurl":"",
+                        "hintpic":"https://pic2.16pic.com/00/20/02/16pic_2002642_b.jpg"
+                    },
+                    {
+                        "picid":"2",
+                        "picdesc":"",
+                        "picstateicon":null,
+                        "picurl":"",
+                        "hintpic":"https://pic2.16pic.com/00/20/02/16pic_2002642_b.jpg"
+                    },
+                    {
+                        "picid":"2",
+                        "picdesc":"",
+                        "picstateicon":null,
+                        "picurl":"",
+                        "hintpic":"https://pic2.16pic.com/00/20/02/16pic_2002642_b.jpg"
                     }
                 ]
             }
