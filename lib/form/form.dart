@@ -9,7 +9,6 @@ enum TFormListType { column, sliver, builder, separated }
 class TForm extends StatefulWidget {
   final List<TFormRow> rows;
   final TFormListType listType;
-  final bool readOnly;
   final Divider divider;
 
   get deepCopyRows => rows.map((e) => e.clone()).toList();
@@ -18,7 +17,6 @@ class TForm extends StatefulWidget {
     Key key,
     this.rows,
     this.listType = TFormListType.column,
-    this.readOnly,
     this.divider,
   }) : super(key: key);
 
@@ -26,7 +24,6 @@ class TForm extends StatefulWidget {
     Key key,
     this.rows,
     this.listType = TFormListType.sliver,
-    this.readOnly,
     this.divider,
   }) : super(key: key);
 
@@ -34,7 +31,6 @@ class TForm extends StatefulWidget {
     Key key,
     this.rows,
     this.listType = TFormListType.builder,
-    this.readOnly,
     this.divider,
   }) : super(key: key);
 
@@ -51,7 +47,6 @@ class TForm extends StatefulWidget {
 class TFormState extends State<TForm> {
   List<TFormRow> rows;
   get form => widget;
-  get readOnly => widget.readOnly;
   get divider => widget.divider;
 
   TFormState(this.rows);

@@ -18,7 +18,7 @@ class _TFormCellState extends State<TFormCell> {
 
   @override
   Widget build(BuildContext context) {
-    // widget
+    // cell
     Widget widget;
     if (row.widget != null) {
       widget = row.widget;
@@ -27,9 +27,6 @@ class _TFormCellState extends State<TFormCell> {
     } else {
       widget = TFormField(row: row);
     }
-    // readonly
-    widget = AbsorbPointer(
-        child: widget, absorbing: TForm.of(context).readOnly ?? false);
     // animation
     widget = row.animation ?? false
         ? TweenAnimationBuilder(

@@ -28,6 +28,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
   bool obscureText;
   TextInputType keyboardType;
   OverlayVisibilityMode clearButtonMode;
+  TextAlign textAlign;
 
   List options;
 
@@ -77,6 +78,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.keyboardType,
     this.clearButtonMode = OverlayVisibilityMode.editing,
     this.obscureText,
+    this.textAlign = TextAlign.right,
   });
 
   /// 输入
@@ -98,6 +100,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.clearButtonMode = OverlayVisibilityMode.editing,
     this.obscureText,
     this.state,
+    this.textAlign = TextAlign.left,
   }) {
     this.type = TFormRowTypeInput;
   }
@@ -116,6 +119,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.validator,
     this.fieldConfig,
     this.suffixWidget,
+    this.textAlign = TextAlign.right,
   }) {
     this.type = TFormRowTypeSelector;
   }
@@ -134,6 +138,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.validator,
     this.fieldConfig,
     this.suffixWidget,
+    this.textAlign = TextAlign.right,
   }) {
     this.type = TFormRowTypeMultipleSelector;
   }
@@ -154,6 +159,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.validator,
     this.fieldConfig,
     this.suffixWidget,
+    this.textAlign = TextAlign.right,
   }) {
     this.type = TFormRowTypeCustomSelector;
   }
@@ -201,7 +207,8 @@ class TFormRow implements TFormCloneable<TFormRow> {
       ..fieldConfig = fieldConfig
       ..keyboardType = keyboardType
       ..clearButtonMode = clearButtonMode
-      ..obscureText = obscureText;
+      ..obscureText = obscureText
+      ..textAlign = textAlign;
   }
 }
 
@@ -212,8 +219,8 @@ class TFormFieldConfig {
   TextStyle valueStyle;
   TextStyle placeholderStyle;
   Divider divider;
-  Icon selectorIcon;
-  Icon clearIcon;
+  Widget selectorIcon;
+  Color disableColor;
 
   TFormFieldConfig({
     this.height,
@@ -222,5 +229,7 @@ class TFormFieldConfig {
     this.valueStyle,
     this.placeholderStyle,
     this.divider,
+    this.selectorIcon,
+    this.disableColor,
   });
 }

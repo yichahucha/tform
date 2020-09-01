@@ -28,7 +28,6 @@ class FormDynamicPage extends StatelessWidget {
                 TForm.sliver(
                   key: _dynamicFormKey,
                   rows: snapshot.data,
-                  readOnly: false,
                   divider: Divider(
                     height: 0.5,
                     thickness: 0.5,

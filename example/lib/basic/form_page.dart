@@ -41,7 +41,6 @@ class FormPage extends StatelessWidget {
       body: TForm.builder(
         key: _formKey,
         rows: buildFormRows(),
-        readOnly: false,
         divider: Divider(
           height: 0.5,
           thickness: 0.5,
@@ -54,18 +53,22 @@ class FormPage extends StatelessWidget {
 List<TFormRow> buildFormRows() {
   return [
     TFormRow.input(
-      enabled: false,
       title: "姓名",
       placeholder: "请输入姓名",
       value: "张二蛋",
       fieldConfig: TFormFieldConfig(
-          height: 100, titleStyle: TextStyle(color: Colors.red, fontSize: 20)),
+        height: 100,
+        titleStyle: TextStyle(color: Colors.red, fontSize: 20),
+        valueStyle: TextStyle(color: Colors.orange, fontSize: 20),
+        placeholderStyle: TextStyle(color: Colors.green, fontSize: 20),
+      ),
     ),
     TFormRow.input(
+      enabled: false,
+      requireStar: true,
       title: "身份证号",
       placeholder: "请输入身份证号",
       value: "4101041991892382938293",
-      clearButtonMode: OverlayVisibilityMode.editing,
     ),
     TFormRow.input(
       keyboardType: TextInputType.number,
@@ -119,6 +122,9 @@ List<TFormRow> buildFormRows() {
       onTap: (context, row) async {
         return showPickerDate(context);
       },
+      fieldConfig: TFormFieldConfig(
+        selectorIcon: SizedBox.shrink(),
+      ),
     ),
     TFormRow.customCell(
       widget: Container(

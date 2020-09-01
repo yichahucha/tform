@@ -21,10 +21,6 @@ class _TFormFieldState extends State<TFormField> {
       widget.row.type == TFormRowTypeMultipleSelector ||
       widget.row.type == TFormRowTypeCustomSelector;
 
-  bool get _isSelectorPush =>
-      widget.row.type == TFormRowTypeSelector ||
-      widget.row.type == TFormRowTypeMultipleSelector;
-
   bool get _isInput => widget.row.type == TFormRowTypeInput;
 
   TFormRow get row => widget.row;
@@ -42,11 +38,10 @@ class _TFormFieldState extends State<TFormField> {
         TextStyle(fontSize: 15, color: Colors.black87);
   }
 
-  Icon get _selectorIcon => row.fieldConfig?.selectorIcon ?? _isSelectorPush
-      ? Icon(Icons.keyboard_arrow_right)
-      : null;
+  Widget get _selectorIcon =>
+      row.fieldConfig?.selectorIcon ?? Icon(Icons.keyboard_arrow_right);
 
-  Icon get _clearIcon => row.fieldConfig?.clearIcon;
+  Color get _disableColor => row.fieldConfig?.disableColor ?? Colors.black54;
 
   @override
   Widget build(BuildContext context) {
@@ -79,20 +74,20 @@ class _TFormFieldState extends State<TFormField> {
 
   CupertinoTextField _buildCupertinoTextField(BuildContext context) {
     return CupertinoTextField(
-      suffix: _isSelector ? _selectorIcon : _clearIcon,
+      suffix: _isSelector ? _selectorIcon : null,
       obscureText: row.obscureText ?? false,
       controller: _controller,
       clearButtonMode: _isInput && _enabled
           ? row.clearButtonMode ?? OverlayVisibilityMode.never
           : OverlayVisibilityMode.never,
       enabled: _enabled,
-      textAlign:
-          row.type == TFormRowTypeInput ? TextAlign.left : TextAlign.right,
-      style: _valueStyle,
+      textAlign: row.textAlign ?? TextAlign.left,
       decoration: BoxDecoration(),
       placeholder: row.placeholder ?? "",
       keyboardType: row.keyboardType,
       maxLength: row.maxLength,
+      style:
+          !_enabled ? _valueStyle.copyWith(color: _disableColor) : _valueStyle,
       placeholderStyle: row.fieldConfig?.placeholderStyle ??
           const TextStyle(fontSize: 15, color: CupertinoColors.placeholderText),
       readOnly: _isSelector,
@@ -145,11 +140,14 @@ class _TFormFieldState extends State<TFormField> {
     return RichText(
         text: TextSpan(
       text: row.title ?? "",
-      style: _titleStyle,
+      style:
+          !_enabled ? _titleStyle.copyWith(color: _disableColor) : _titleStyle,
       children: [
         TextSpan(
-            text: _require ? _requireStar ? "*" : "" : "",
-            style: _titleStyle.copyWith(color: Colors.red))
+          text: _require ? _requireStar ? "*" : "" : "",
+          style: _titleStyle.copyWith(
+              color: _enabled ? Colors.red : _disableColor),
+        )
       ],
     ));
   }
