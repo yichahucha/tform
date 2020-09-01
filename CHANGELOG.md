@@ -29,3 +29,6 @@
 ## 0.6.1
 * optimization selector
 * bug fix
+
+## 0.7.0
+* support macos web
