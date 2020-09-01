@@ -103,28 +103,6 @@ List<TFormRow> buildFormRows() {
       options: ["父亲", "母亲", "女儿", "儿子"],
     ),
     TFormRow.customSelector(
-      title: "婚姻状况",
-      placeholder: "请选择",
-      state: [
-        ["未婚", "已婚"],
-        [
-          TFormRow.input(
-              title: "配偶姓名", placeholder: "请输入配偶姓名", requireStar: true),
-          TFormRow.input(
-              title: "配偶电话", placeholder: "请输入配偶电话", requireStar: true)
-        ]
-      ],
-      onTap: (context, row) async {
-        String value = await showPicker(row.state[0], context);
-        if (value == "已婚") {
-          TForm.of(context).insert(row, row.state[1]);
-        } else {
-          TForm.of(context).delete(row.state[1]);
-        }
-        return value;
-      },
-    ),
-    TFormRow.customSelector(
       title: "出生年月",
       placeholder: "请选择",
       onTap: (context, row) async {

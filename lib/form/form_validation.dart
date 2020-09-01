@@ -9,8 +9,10 @@ List formValidationErrors(List<TFormRow> rows) {
         errors.add(row.requireMsg ?? "${row.title} 不能为空");
       }
     } else {
-      if ((row.require ?? false) && row.value?.length == 0) {
-        errors.add(row.requireMsg ?? "${row.title} 不能为空");
+      if (row.require ?? false) {
+        if (row.value == null || row.value.length == 0) {
+          errors.add(row.requireMsg ?? "${row.title} 不能为空");
+        }
       }
     }
   });

@@ -17,3 +17,7 @@
 
 ## 0.4.0
 * bug fix
+
+## 0.5.0
+* perfect the dynamic form example
+* bug fix
