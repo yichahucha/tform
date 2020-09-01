@@ -25,3 +25,7 @@
 ## 0.6.0
 * optimization selector
 * bug fix
+
+## 0.6.1
+* optimization selector
+* bug fix

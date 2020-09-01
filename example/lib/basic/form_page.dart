@@ -139,7 +139,9 @@ List<TFormRow> buildFormRows() {
       state: [
         {"picurl": ""},
         {"picurl": ""},
-        {"picurl": ""}
+        {"picurl": ""},
+        {"picurl": ""},
+        {"picurl": ""},
       ],
       requireMsg: "请完成上传房屋照片",
       validator: (row) {
