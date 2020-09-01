@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tform/form/form.dart';
+import 'package:tform/form/form_selector_page.dart';
 
 import 'package:tform/tform.dart';
 
@@ -58,7 +59,7 @@ List<TFormRow> buildFormRows() {
       placeholder: "请输入姓名",
       value: "张二蛋",
       fieldConfig: TFormFieldConfig(
-          height: 100, style: TextStyle(color: Colors.red, fontSize: 20)),
+          height: 100, titleStyle: TextStyle(color: Colors.red, fontSize: 20)),
     ),
     TFormRow.input(
       title: "身份证号",
@@ -95,12 +96,22 @@ List<TFormRow> buildFormRows() {
     TFormRow.selector(
       title: "学历",
       placeholder: "请选择",
-      options: ["小学", "初中", "高中", "专科", "本科", "硕士及以上"],
+      options: [
+        TFormOptionModel(value: "专科"),
+        TFormOptionModel(value: "本科"),
+        TFormOptionModel(value: "硕士"),
+        TFormOptionModel(value: "博士")
+      ],
     ),
     TFormRow.multipleSelector(
       title: "家庭成员",
       placeholder: "请选择",
-      options: ["父亲", "母亲", "女儿", "儿子"],
+      options: [
+        TFormOptionModel(value: "父亲", selected: false),
+        TFormOptionModel(value: "母亲", selected: false),
+        TFormOptionModel(value: "儿子", selected: false),
+        TFormOptionModel(value: "女儿", selected: false)
+      ],
     ),
     TFormRow.customSelector(
       title: "出生年月",

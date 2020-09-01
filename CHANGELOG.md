@@ -21,3 +21,7 @@
 ## 0.5.0
 * perfect the dynamic form example
 * bug fix
+
+## 0.6.0
+* optimization selector
+* bug fix

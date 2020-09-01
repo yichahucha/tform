@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class LTSelectorPage extends StatelessWidget {
-  LTSelectorPage({Key key, this.options, this.isMultipleSelector, this.title})
+class TFormSelectorPage extends StatelessWidget {
+  TFormSelectorPage(
+      {Key key, this.options, this.isMultipleSelector, this.title})
       : super(key: key);
 
   final String title;
-  final List<LTOptionModel> options;
+  final List<TFormOptionModel> options;
   final bool isMultipleSelector;
 
   @override
@@ -23,7 +24,7 @@ class LTSelectorPage extends StatelessWidget {
                   onPressed: () {
                     String values = options
                         .where((element) => element.selected)
-                        .map((e) => e.text)
+                        .map((e) => e.value)
                         .toList()
                         .join(",");
                     Navigator.of(context).pop(values);
@@ -38,6 +39,7 @@ class LTSelectorPage extends StatelessWidget {
           return LTListTitle(
             isMultipleSelector: isMultipleSelector,
             model: options[index],
+            options: options,
           );
         },
       ),
@@ -46,9 +48,11 @@ class LTSelectorPage extends StatelessWidget {
 }
 
 class LTListTitle extends StatefulWidget {
-  LTListTitle({Key key, this.model, this.isMultipleSelector}) : super(key: key);
-  final LTOptionModel model;
+  LTListTitle({Key key, this.model, this.isMultipleSelector, this.options})
+      : super(key: key);
+  final TFormOptionModel model;
   final bool isMultipleSelector;
+  final List<TFormOptionModel> options;
 
   @override
   _LTListTitleState createState() => _LTListTitleState();
@@ -60,14 +64,17 @@ class _LTListTitleState extends State<LTListTitle> {
     return ListTile(
       onTap: () {
         if (widget.isMultipleSelector) {
-          widget.model.selected = !widget.model.selected;
-          setState(() {});
+          setState(() {
+            widget.model.selected = !widget.model.selected;
+          });
         } else {
-          Navigator.of(context).pop(widget.model.text);
+          widget.options.map((e) => e.selected = false).toList();
+          widget.model.selected = true;
+          Navigator.of(context).pop(widget.model.value);
         }
       },
       selected: widget.model.selected,
-      title: Text(widget.model.text),
+      title: Text(widget.model.value),
       trailing: widget.isMultipleSelector && widget.model.selected
           ? Icon(Icons.done)
           : SizedBox.shrink(),
@@ -75,10 +82,10 @@ class _LTListTitleState extends State<LTListTitle> {
   }
 }
 
-class LTOptionModel {
+class TFormOptionModel {
   final int index;
-  final String text;
+  final String value;
   bool selected;
 
-  LTOptionModel({this.text, this.selected = false, this.index});
+  TFormOptionModel({this.value, this.selected = false, this.index});
 }

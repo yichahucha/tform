@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tform/tform.dart';
 import 'package:tform_example/application.dart';
@@ -95,7 +94,6 @@ TFormRow getRow(e) {
         maxLength: e["maxlength"] != null ? int.parse(e["maxlength"]) : null,
         require: e["mustinput"],
         requireStar: e["mustinput"],
-        clearButtonMode: OverlayVisibilityMode.editing,
       );
       break;
     case 2:
@@ -164,7 +162,6 @@ TFormRow getRow(e) {
         require: e["mustinput"],
         requireStar: e["mustinput"],
         state: e["btnstate"],
-        clearButtonMode: OverlayVisibilityMode.editing,
         suffixWidget: (context, row) {
           return FlatButton(
             onPressed: () {

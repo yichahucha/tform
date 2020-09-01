@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const TFormRowTypeInput = "TFormRowTypeInput";
+const TFormRowTypeCustomSelector = "TFormRowTypeCustomSelector";
 const TFormRowTypeSelector = "TFormRowTypeSelector";
 const TFormRowTypeMultipleSelector = "TFormRowTypeMultipleSelector";
-const TFormRowTypeCustomSelector = "TFormRowTypeCustomSelector";
 
 abstract class TFormCloneable<T extends TFormCloneable<T>> {
   T clone();
@@ -75,7 +75,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.validator,
     this.fieldConfig,
     this.keyboardType,
-    this.clearButtonMode,
+    this.clearButtonMode = OverlayVisibilityMode.editing,
     this.obscureText,
   });
 
@@ -95,7 +95,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.maxLength,
     this.fieldConfig,
     this.keyboardType,
-    this.clearButtonMode,
+    this.clearButtonMode = OverlayVisibilityMode.editing,
     this.obscureText,
     this.state,
   }) {
@@ -166,7 +166,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.require = false,
   });
 
-  // 自定义有状态的 cell 配合 state 属性使用
+  // 自定义有状态的 cell 配合 state 使用
   TFormRow.customCellBuilder({
     this.tag,
     this.state,
@@ -208,14 +208,18 @@ class TFormRow implements TFormCloneable<TFormRow> {
 class TFormFieldConfig {
   double height;
   EdgeInsets padding;
-  TextStyle style;
+  TextStyle titleStyle;
+  TextStyle valueStyle;
   TextStyle placeholderStyle;
   Divider divider;
+  Icon selectorIcon;
+  Icon clearIcon;
 
   TFormFieldConfig({
     this.height,
     this.padding,
-    this.style,
+    this.titleStyle,
+    this.valueStyle,
     this.placeholderStyle,
     this.divider,
   });

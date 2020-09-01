@@ -21,6 +21,10 @@ class _TFormFieldState extends State<TFormField> {
       widget.row.type == TFormRowTypeMultipleSelector ||
       widget.row.type == TFormRowTypeCustomSelector;
 
+  bool get _isSelectorPush =>
+      widget.row.type == TFormRowTypeSelector ||
+      widget.row.type == TFormRowTypeMultipleSelector;
+
   bool get _isInput => widget.row.type == TFormRowTypeInput;
 
   TFormRow get row => widget.row;
@@ -28,10 +32,21 @@ class _TFormFieldState extends State<TFormField> {
   bool get _require => row.require ?? false;
   bool get _requireStar => row.requireStar ?? false;
 
-  @override
-  void initState() {
-    super.initState();
+  TextStyle get _titleStyle {
+    return row.fieldConfig?.titleStyle ??
+        TextStyle(fontSize: 15, color: Colors.black87);
   }
+
+  TextStyle get _valueStyle {
+    return row.fieldConfig?.valueStyle ??
+        TextStyle(fontSize: 15, color: Colors.black87);
+  }
+
+  Icon get _selectorIcon => row.fieldConfig?.selectorIcon ?? _isSelectorPush
+      ? Icon(Icons.keyboard_arrow_right)
+      : null;
+
+  Icon get _clearIcon => row.fieldConfig?.clearIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -44,88 +59,12 @@ class _TFormFieldState extends State<TFormField> {
           height: row.fieldConfig?.height ?? 58.0,
           child: Row(
             children: [
-              RichText(
-                  text: TextSpan(
-                text: row.title ?? "",
-                style: row.fieldConfig?.style ??
-                    TextStyle(fontSize: 15, color: Colors.black87),
-                children: [
-                  TextSpan(
-                      text: _require ? _requireStar ? "*" : "" : "",
-                      style:
-                          row.fieldConfig?.style?.copyWith(color: Colors.red) ??
-                              TextStyle(fontSize: 15, color: Colors.red))
-                ],
-              )),
+              _buildRichText(),
               SizedBox(
                 width: 5,
               ),
               Expanded(
-                child: CupertinoTextField(
-                  suffix: _isSelector
-                      ? Icon(Icons.keyboard_arrow_right,
-                          color:
-                              row.fieldConfig?.style?.color ?? Colors.black87)
-                      : null,
-                  obscureText: row.obscureText ?? false,
-                  controller: _controller,
-                  clearButtonMode: _isInput && _enabled
-                      ? row.clearButtonMode ?? OverlayVisibilityMode.never
-                      : OverlayVisibilityMode.never,
-                  enabled: _enabled,
-                  textAlign: row.type == TFormRowTypeInput
-                      ? TextAlign.left
-                      : TextAlign.right,
-                  style: row.fieldConfig?.style ??
-                      TextStyle(fontSize: 15, color: Colors.black87),
-                  decoration: BoxDecoration(),
-                  placeholder: row.placeholder ?? "",
-                  keyboardType: row.keyboardType,
-                  maxLength: row.maxLength,
-                  placeholderStyle: row.fieldConfig?.placeholderStyle ??
-                      const TextStyle(
-                          fontSize: 15, color: CupertinoColors.placeholderText),
-                  readOnly: _isSelector,
-                  onChanged: (value) {
-                    row.value = value;
-                    if (row.onChanged != null) row.onChanged(row);
-                  },
-                  onTap: () async {
-                    if (_isSelector) {
-                      String value = "";
-                      switch (widget.row.type) {
-                        case TFormRowTypeMultipleSelector:
-                        case TFormRowTypeSelector:
-                          if (row.options == null && row.options.length == 0)
-                            return;
-                          value = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LTSelectorPage(
-                                title: row.title,
-                                options: row.options.map((e) {
-                                  return LTOptionModel(text: e);
-                                }).toList(),
-                                isMultipleSelector:
-                                    row.type == TFormRowTypeMultipleSelector,
-                              ),
-                            ),
-                          );
-                          break;
-                        case TFormRowTypeCustomSelector:
-                          if (row.onTap == null) return;
-                          value = await row.onTap(context, row);
-                          break;
-                        default:
-                      }
-                      if (value != null && value.length > 0) {
-                        setState(() {
-                          row.value = value;
-                        });
-                      }
-                    }
-                  },
-                ),
+                child: _buildCupertinoTextField(context),
               ),
               row.suffixWidget != null
                   ? row.suffixWidget(context, row)
@@ -136,5 +75,82 @@ class _TFormFieldState extends State<TFormField> {
         row.fieldConfig?.divider ?? SizedBox.shrink()
       ],
     );
+  }
+
+  CupertinoTextField _buildCupertinoTextField(BuildContext context) {
+    return CupertinoTextField(
+      suffix: _isSelector ? _selectorIcon : _clearIcon,
+      obscureText: row.obscureText ?? false,
+      controller: _controller,
+      clearButtonMode: _isInput && _enabled
+          ? row.clearButtonMode ?? OverlayVisibilityMode.never
+          : OverlayVisibilityMode.never,
+      enabled: _enabled,
+      textAlign:
+          row.type == TFormRowTypeInput ? TextAlign.left : TextAlign.right,
+      style: _valueStyle,
+      decoration: BoxDecoration(),
+      placeholder: row.placeholder ?? "",
+      keyboardType: row.keyboardType,
+      maxLength: row.maxLength,
+      placeholderStyle: row.fieldConfig?.placeholderStyle ??
+          const TextStyle(fontSize: 15, color: CupertinoColors.placeholderText),
+      readOnly: _isSelector,
+      onChanged: (value) {
+        row.value = value;
+        if (row.onChanged != null) row.onChanged(row);
+      },
+      onTap: () async {
+        if (_isSelector) {
+          String value = "";
+          switch (widget.row.type) {
+            case TFormRowTypeMultipleSelector:
+            case TFormRowTypeSelector:
+              if (row.options == null && row.options.length == 0) return;
+              value = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TFormSelectorPage(
+                    title: row.title,
+                    options: row.options
+                            .every((element) => (element is TFormOptionModel))
+                        ? <TFormOptionModel>[...row.options]
+                        : row.options.map((e) {
+                            return TFormOptionModel(value: e);
+                          }).toList(),
+                    isMultipleSelector:
+                        row.type == TFormRowTypeMultipleSelector,
+                  ),
+                ),
+              );
+              break;
+            case TFormRowTypeCustomSelector:
+              if (row.onTap == null) return;
+              value = await row.onTap(context, row);
+              break;
+            default:
+          }
+          if (value != null) {
+            setState(() {
+              row.value = value;
+            });
+          }
+          if (row.onChanged != null) row.onChanged(row);
+        }
+      },
+    );
+  }
+
+  RichText _buildRichText() {
+    return RichText(
+        text: TextSpan(
+      text: row.title ?? "",
+      style: _titleStyle,
+      children: [
+        TextSpan(
+            text: _require ? _requireStar ? "*" : "" : "",
+            style: _titleStyle.copyWith(color: Colors.red))
+      ],
+    ));
   }
 }
