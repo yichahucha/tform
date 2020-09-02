@@ -43,7 +43,7 @@ class FormDynamicPage extends StatelessWidget {
                         List errors =
                             (_dynamicFormKey.currentState as TFormState)
                                 .validate();
-                        if (errors.length > 0) {
+                        if (!errors.isEmpty) {
                           showToast(errors.first);
                           return;
                         }

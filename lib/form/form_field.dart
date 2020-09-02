@@ -101,7 +101,7 @@ class _TFormFieldState extends State<TFormField> {
           switch (widget.row.type) {
             case TFormRowTypeMultipleSelector:
             case TFormRowTypeSelector:
-              if (row.options == null && row.options.length == 0) return;
+              if (row.options == null || row.options.isEmpty) return;
               value = await Navigator.push(
                 context,
                 MaterialPageRoute(

@@ -32,3 +32,6 @@
 
 ## 0.7.0
 * support macos web
+
+## 0.7.1
+* bug fix

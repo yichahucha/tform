@@ -28,7 +28,7 @@ class FormPage extends StatelessWidget {
             onPressed: () {
               //校验
               List errors = (_formKey.currentState as TFormState).validate();
-              if (errors.length > 0) {
+              if (!errors.isEmpty) {
                 showToast(errors.first);
                 return;
               }
@@ -59,8 +59,8 @@ List<TFormRow> buildFormRows() {
       fieldConfig: TFormFieldConfig(
         height: 100,
         titleStyle: TextStyle(color: Colors.red, fontSize: 20),
-        valueStyle: TextStyle(color: Colors.orange, fontSize: 20),
-        placeholderStyle: TextStyle(color: Colors.green, fontSize: 20),
+        valueStyle: TextStyle(color: Colors.orange, fontSize: 30),
+        placeholderStyle: TextStyle(color: Colors.green, fontSize: 25),
       ),
     ),
     TFormRow.input(
