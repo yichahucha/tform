@@ -35,3 +35,6 @@
 
 ## 0.7.1
 * bug fix
+
+## 0.7.2
+* Supplementary document

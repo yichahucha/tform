@@ -11,6 +11,7 @@ class TForm extends StatefulWidget {
   final TFormListType listType;
   final Divider divider;
 
+  /// 这里做了一次深拷贝，为了保存一份原始值
   get deepCopyRows => rows.map((e) => e.clone()).toList();
 
   TForm({
@@ -34,6 +35,7 @@ class TForm extends StatefulWidget {
     this.divider,
   }) : super(key: key);
 
+  /// 注意 of 方法获取的是 TFormState
   static TFormState of(BuildContext context) {
     final _TFormScope scope =
         context.dependOnInheritedWidgetOfExactType<_TFormScope>();
@@ -51,6 +53,7 @@ class TFormState extends State<TForm> {
 
   TFormState(this.rows);
 
+  /// 表单插入，可以是单个 row，也可以使一组 rows
   void insert(currentRow, item) {
     if (item is List<TFormRow>) {
       rows.insertAll(rows.indexOf(currentRow) + 1,
@@ -61,6 +64,7 @@ class TFormState extends State<TForm> {
     reload();
   }
 
+  /// 表单删除，可以是单个 row，也可以使一组 rows
   void delete(item) {
     if (item is List<TFormRow>) {
       item.forEach((element) {
@@ -72,18 +76,21 @@ class TFormState extends State<TForm> {
     reload();
   }
 
+  /// 重置表单
   void reset() {
     setState(() {
       rows = form.deepCopyRows;
     });
   }
 
+  /// 更新表单
   void reload() {
     setState(() {
       rows = [...rows];
     });
   }
 
+  /// 验证表单
   List validate() {
     List errors = formValidationErrors(rows);
     return errors;

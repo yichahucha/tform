@@ -1,6 +1,6 @@
 name: tform
-description: A easy, extensible and dynamic flutter form framework.
-version: 0.7.1
+description: A easy, extensible and dynamic flutter form framework. Support for custom selectors，validators and widgets. Support form verification，insert，delete and so on.
+version: 0.7.2
 homepage: https://github.com/yichahucha/tform
 
 environment:

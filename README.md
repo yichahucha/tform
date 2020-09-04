@@ -1,12 +1,13 @@
 # tform
 
-A easy, extensible and dynamic flutter form framework.
+A easy, extensible and dynamic flutter form framework. Support for custom selectors，validators and widgets. Support form verification，insert，delete and so on.
 
 ## Installing
 Add this to your package's pubspec.yaml file:
+
 ```yaml
 dependencies:
-  tform: ^0.7.1
+  tform: ^0.7.2
 ```
 
 ## Example

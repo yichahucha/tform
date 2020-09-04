@@ -11,28 +11,53 @@ abstract class TFormCloneable<T extends TFormCloneable<T>> {
 }
 
 class TFormRow implements TFormCloneable<TFormRow> {
+  /// 唯一标识
   String tag;
+
+  /// 类型
   String type;
 
+  /// 是否必填
   bool require;
+
+  /// 必填项是否显示 * 号
   bool requireStar;
+
+  /// 必填项校验不通过提示
   String requireMsg;
+
+  /// 自定义校验规则
   bool Function(TFormRow) validator;
 
+  /// 选择类型或者输入类型的值
   String value;
+
+  /// 标题
   String title;
+
+  /// 输入框占位
   String placeholder;
+
+  /// 是否能编辑
   bool enabled;
 
+  /// 输入框长度限制
   int maxLength;
+
+  /// 输入框内容是否加密
   bool obscureText;
+
+  /// 键盘类型
   TextInputType keyboardType;
+
+  /// 清除按钮显示模式
   OverlayVisibilityMode clearButtonMode;
+
+  /// 输入框文字对齐方式
   TextAlign textAlign;
 
+  /// 选择类型的选项，可以是纯字符串，也可以是 TFormOptionModel 对象
   List options;
-
-  bool animation;
 
   /// textfield 样式配置
   TFormFieldConfig fieldConfig;
@@ -54,6 +79,9 @@ class TFormRow implements TFormCloneable<TFormRow> {
 
   ///自定义 widget 对应的 state
   var state;
+
+  /// 标记插入删除操作是否显示动画
+  bool animation;
 
   TFormRow({
     this.tag,
