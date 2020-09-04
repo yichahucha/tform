@@ -38,3 +38,6 @@
 
 ## 0.7.2
 * Supplementary document
+
+## 0.7.3
+* Supplementary document
