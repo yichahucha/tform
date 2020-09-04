@@ -44,3 +44,6 @@
 
 ## 0.7.4
 * support web
+
+## 0.7.5
+* support web
