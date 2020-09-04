@@ -37,7 +37,10 @@
 * bug fix
 
 ## 0.7.2
-* Supplementary document
+* supplementary document
 
 ## 0.7.3
-* Supplementary document
+* supplementary document
+
+## 0.7.4
+* support web
