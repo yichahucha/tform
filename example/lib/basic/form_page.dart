@@ -28,7 +28,7 @@ class FormPage extends StatelessWidget {
             onPressed: () {
               //校验
               List errors = (_formKey.currentState as TFormState).validate();
-              if (!errors.isEmpty) {
+              if (errors.isNotEmpty) {
                 showToast(errors.first);
                 return;
               }

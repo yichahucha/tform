@@ -32,7 +32,7 @@ class _SelectImageViewState extends State<SelectImageView> {
         context: context,
         builder: (BuildContext context) {
           return Container(
-            height: 200.0,
+            height: 180.0,
             child: Column(
               children: <Widget>[
                 ListTile(
