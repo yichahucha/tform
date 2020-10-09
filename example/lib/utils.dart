@@ -6,7 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'application.dart';
 
 void showToast(String text) {
-  FToast fToast = FToast(Application.appContext);
+  FToast fToast = FToast()..init(Application.appContext);
   Widget toast = Container(
     padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
     decoration: BoxDecoration(
