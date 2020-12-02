@@ -96,6 +96,27 @@ List<TFormRow> buildFormRows() {
         );
       },
     ),
+    TFormRow.input(
+      title: "密码",
+      value: "123456",
+      obscureText: true,
+      state: false,
+      placeholder: "请输入密码",
+      suffixWidget: (context, row) {
+        return GestureDetector(
+          onTap: () {
+            row.state = !row.state;
+            row.obscureText = !row.obscureText;
+            TForm.of(context).reload();
+          },
+          child: Image.asset(
+            row.state ? "lib/src/eyes_open.png" : "lib/src/eyes_close.png",
+            width: 20,
+            height: 20,
+          ),
+        );
+      },
+    ),
     TFormRow.selector(
       title: "学历",
       placeholder: "请选择",

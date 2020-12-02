@@ -78,6 +78,7 @@ class TFormState extends State<TForm> {
 
   /// 重置表单
   void reset() {
+    FocusScope.of(context).requestFocus(FocusNode());
     setState(() {
       rows = form.deepCopyRows;
     });
@@ -85,6 +86,7 @@ class TFormState extends State<TForm> {
 
   /// 更新表单
   void reload() {
+    FocusScope.of(context).requestFocus(FocusNode());
     setState(() {
       rows = [...rows];
     });
@@ -92,6 +94,7 @@ class TFormState extends State<TForm> {
 
   /// 验证表单
   List validate() {
+    FocusScope.of(context).requestFocus(FocusNode());
     List errors = formValidationErrors(rows);
     return errors;
   }

@@ -53,3 +53,6 @@
 
 ## 0.8.1
 * fix
+
+## 0.9.0
+* add password examples
