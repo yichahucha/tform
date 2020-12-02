@@ -144,11 +144,7 @@ class _TFormFieldState extends State<TFormField> {
           !_enabled ? _titleStyle.copyWith(color: _disableColor) : _titleStyle,
       children: [
         TextSpan(
-          text: _require
-              ? _requireStar
-                  ? "*"
-                  : ""
-              : "",
+          text: _require ? _requireStar ? "*" : "" : "",
           style: _titleStyle.copyWith(
               color: _enabled ? Colors.red : _disableColor),
         )
