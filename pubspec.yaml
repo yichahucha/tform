@@ -1,6 +1,6 @@
 name: tform
 description: A easy, extensible and dynamic flutter form framework. Support for custom selectors, validators and widgets. Support form verification, insert, delete and so on.
-version: 0.9.0
+version: 0.9.3
 homepage: https://github.com/yichahucha/tform
 
 environment:
@@ -24,13 +24,13 @@ flutter:
   # The 'pluginClass' and Android 'package' identifiers should not ordinarily
   # be modified. They are used by the tooling to maintain consistency when
   # adding or updating assets for this project.
-  plugin:
-    platforms:
-      android:
-        package: com.example.tform
-        pluginClass: TformPlugin
-      ios:
-        pluginClass: TformPlugin
+  # plugin:
+  #   platforms:
+  #     android:
+  #       package: com.example.tform
+  #       pluginClass: TformPlugin
+  #     ios:
+  #       pluginClass: TformPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
