@@ -81,8 +81,8 @@ class _TFormFieldState extends State<TFormField> {
           ? row.clearButtonMode ?? OverlayVisibilityMode.never
           : OverlayVisibilityMode.never,
       enabled: _enabled,
+      decoration: BoxDecoration(color: Colors.white),
       textAlign: row.textAlign ?? TextAlign.left,
-      decoration: BoxDecoration(),
       placeholder: row.placeholder ?? "",
       keyboardType: row.keyboardType,
       maxLength: row.maxLength,
