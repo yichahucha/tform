@@ -27,6 +27,11 @@ class _TFormCellState extends State<TFormCell> {
     } else {
       widget = TFormField(row: row);
     }
+    // backgroudcolor white default
+    widget = Container(
+      child: widget,
+      color: Colors.white,
+    );
     // animation
     widget = row.animation ?? false
         ? TweenAnimationBuilder(

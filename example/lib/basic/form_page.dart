@@ -17,10 +17,11 @@ class FormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text("表单"),
         actions: [
-          FlatButton(
+          TextButton(
             child: Text(
               "提交",
               style: TextStyle(color: Colors.white, fontSize: 16),
@@ -42,8 +43,7 @@ class FormPage extends StatelessWidget {
         key: _formKey,
         rows: buildFormRows(),
         divider: Divider(
-          height: 0.5,
-          thickness: 0.5,
+          height: 1,
         ),
       ),
     );
@@ -77,6 +77,7 @@ List<TFormRow> buildFormRows() {
       maxLength: 11,
       requireMsg: "请输入正确的手机号",
       requireStar: true,
+      textAlign: TextAlign.right,
       validator: (row) {
         return RegExp(
                 r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$')
