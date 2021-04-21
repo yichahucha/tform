@@ -36,7 +36,7 @@ class _VerifitionCodeButtonState extends State<VerifitionCodeButton> {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return TextButton(
         onPressed: () {
           if (timer == null) {
             if (widget.onPressed != null) widget.onPressed();

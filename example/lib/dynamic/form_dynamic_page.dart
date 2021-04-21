@@ -163,12 +163,11 @@ TFormRow getRow(e) {
         requireStar: e["mustinput"],
         state: e["btnstate"],
         suffixWidget: (context, row) {
-          return FlatButton(
+          return TextButton(
             onPressed: () {
               row.state = "1";
               showToast("验证成功");
             },
-            padding: EdgeInsets.only(left: 35),
             child: Text(
               "验证",
               textAlign: TextAlign.right,
