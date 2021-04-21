@@ -35,7 +35,8 @@ class FormDynamicPage extends StatelessWidget {
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 30, bottom: 30),
+                    padding: const EdgeInsets.only(
+                        top: 30, bottom: 30, left: 22, right: 22),
                     child: NextButton(
                       title: "提交",
                       onPressed: () {

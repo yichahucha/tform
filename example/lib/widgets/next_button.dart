@@ -10,21 +10,18 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: margin,
-      padding: const EdgeInsets.fromLTRB(22, 0, 22, 0),
-      width: double.infinity,
-      height: 44,
-      child: FlatButton(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(44 / 2.0)),
-        color: Theme.of(context).primaryColor,
-        child: Text(
-          title,
-          style:
-              Theme.of(context).textTheme.button.copyWith(color: Colors.white),
-        ),
-        onPressed: onPressed,
+    return TextButton(
+      onPressed: onPressed,
+      style: ButtonStyle(
+          minimumSize: MaterialStateProperty.all(Size(double.infinity, 44)),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(44 / 2)),
+          ),
+          backgroundColor:
+              MaterialStateProperty.all(Theme.of(context).primaryColor)),
+      child: Text(
+        title,
+        style: Theme.of(context).textTheme.button.copyWith(color: Colors.white),
       ),
     );
   }

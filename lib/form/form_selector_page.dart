@@ -16,7 +16,7 @@ class TFormSelectorPage extends StatelessWidget {
         title: Text(title),
         actions: [
           isMultipleSelector
-              ? FlatButton(
+              ? TextButton(
                   child: Text(
                     "完成",
                     style: TextStyle(color: Colors.white, fontSize: 16),
