@@ -1,12 +1,12 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:tform/tform.dart';
-import 'package:tform_example/application.dart';
-import 'package:tform_example/widgets/next_button.dart';
-import 'package:tform_example/widgets/photos_cell.dart';
 
+import 'package:tform/tform.dart';
+
+import '../widgets/next_button.dart';
+import '../widgets/photos_cell.dart';
 import '../utils.dart';
+import '../application.dart';
 
 class FormDynamicPage extends StatelessWidget {
   FormDynamicPage({Key key}) : super(key: key);

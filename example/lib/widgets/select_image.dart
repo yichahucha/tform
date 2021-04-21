@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -13,16 +14,21 @@ class SelectImageView extends StatefulWidget {
 }
 
 class _SelectImageViewState extends State<SelectImageView> {
-  final picker = ImagePicker();
+  final _picker = ImagePicker();
   File _image;
   String _imageUrl;
 
   Future<bool> _getImage(ImageSource source) async {
-    final pickedFile = await picker.getImage(source: source);
-    if (pickedFile != null) {
-      _image = File(pickedFile.path);
-      return true;
-    } else {
+    try {
+      final pickedFile = await _picker.getImage(source: source);
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print('Pick image error: $e');
       return false;
     }
   }
@@ -82,7 +88,9 @@ class _SelectImageViewState extends State<SelectImageView> {
             child: _imageUrl != null
                 ? Image.network(_imageUrl)
                 : _image != null
-                    ? Image.file(File(_image.path))
+                    ? kIsWeb
+                        ? Image.network(_image.path)
+                        : Image.file(_image)
                     : SizedBox.shrink()),
       ),
     );

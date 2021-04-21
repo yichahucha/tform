@@ -1,14 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tform/form/form.dart';
-import 'package:tform/form/form_selector_page.dart';
 
 import 'package:tform/tform.dart';
-
 import '../utils.dart';
-
-import 'package:tform_example/widgets/photos_cell.dart';
-import 'package:tform_example/widgets/verifitionc_code_button.dart';
+import '../widgets/photos_cell.dart';
+import '../widgets/verifitionc_code_button.dart';
 
 class FormPage extends StatelessWidget {
   FormPage({Key key}) : super(key: key);
