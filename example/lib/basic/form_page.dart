@@ -95,7 +95,7 @@ List<TFormRow> buildFormRows() {
       },
     ),
     TFormRow.input(
-      title: "密码",
+      title: "* 密码",
       value: "123456",
       obscureText: true,
       state: false,

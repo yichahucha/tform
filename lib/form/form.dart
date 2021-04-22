@@ -11,9 +11,6 @@ class TForm extends StatefulWidget {
   final TFormListType listType;
   final Divider divider;
 
-  /// 这里做了一次深拷贝，为了保存一份原始值
-  get deepCopyRows => rows.map((e) => e.clone()).toList();
-
   TForm({
     Key key,
     this.rows,
@@ -43,7 +40,7 @@ class TForm extends StatefulWidget {
   }
 
   @override
-  TFormState createState() => TFormState(deepCopyRows);
+  TFormState createState() => TFormState(rows);
 }
 
 class TFormState extends State<TForm> {
@@ -74,14 +71,6 @@ class TFormState extends State<TForm> {
       rows.remove(item);
     }
     reload();
-  }
-
-  /// 重置表单
-  void reset() {
-    FocusScope.of(context).requestFocus(FocusNode());
-    setState(() {
-      rows = form.deepCopyRows;
-    });
   }
 
   /// 更新表单

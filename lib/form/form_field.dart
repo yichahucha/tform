@@ -54,7 +54,7 @@ class _TFormFieldState extends State<TFormField> {
           height: row.fieldConfig?.height ?? 58.0,
           child: Row(
             children: [
-              _buildRichText(),
+              row.title.contains("*") ? _buildTitleText() : _buildRichText(),
               SizedBox(
                 width: 5,
               ),
@@ -154,5 +154,27 @@ class _TFormFieldState extends State<TFormField> {
         )
       ],
     ));
+  }
+
+  Row _buildTitleText() {
+    RegExp re = RegExp(r"\*+|[^\*]+");
+    Iterable<Match> matches = re.allMatches(row.title);
+    final children = matches.map((e) {
+      if (e[0].contains("*")) {
+        return Text(
+          e[0],
+          style: _titleStyle.copyWith(
+              color: _enabled ? Colors.red : _disableColor),
+        );
+      } else {
+        return Text(
+          e[0],
+          style: !_enabled
+              ? _titleStyle.copyWith(color: _disableColor)
+              : _titleStyle,
+        );
+      }
+    }).toList();
+    return Row(children: children);
   }
 }
