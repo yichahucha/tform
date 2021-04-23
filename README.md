@@ -7,7 +7,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  tform: ^1.0.0
+  tform: ^1.0.1
 ```
 
 ## Example
